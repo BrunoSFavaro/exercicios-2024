@@ -1,8 +1,9 @@
 <?php
 
 namespace Chuva\Php\WebScrapping;
-use Chuva\Php\WebScrapping\Entity\Paper;
-use Person;
+use OpenSpout\Common\Entity\Cell;
+use OpenSpout\Common\Entity\Row;
+use OpenSpout\Writer\XLSX\Writer;
 
 /**
  * Runner for the Webscrapping exercice.
@@ -84,7 +85,7 @@ class Main {
     $writer->addRow($soloRow);
 
     // Adiciona uma nova linha na tabela para cada artigo 
-    foreach ($papers as $paper) {
+    foreach ($data as $paper) {
       $row = new Row([
         Cell::fromValue($paper->id),
         Cell::fromValue($paper->title),

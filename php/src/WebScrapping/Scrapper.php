@@ -17,26 +17,26 @@ class Scrapper {
     $xPath = new \DOMXPath($dom);
 
     //Variáveis que irão extrair as informações do site usando XPath
-    $paperX = "//a[#class='paper-card p-lg bd-gradient-left']";
+    $paperX = "//a[@class='paper-card p-lg bd-gradient-left']";
     $titleX = ".//h4[@class='paper-title']";
     $authorX = ".//div[@class='authors']/span";
     $typeX = ".//div[@class='tags mr-sm']";
-    $idX = ".//div[@class='tags flex-row mr-sm']/div[@class='volume-info']";
+    $idX = ".//div[@class='volume-info']";
 
     // Juntando os dados dos diferentes arquivos
-    $papersNodes = $xPath->query("$paperX");
+    $papersNodes = $xPath->query($paperX);
     // Guardando os artigos em um vetor
-    $papersList = [];
+    $paperList = [];
 
     // Foreach para percorrer cada artigo 
     foreach ($papersNodes as $paperNode) {
-      $id = $xPath->query("$idX", $paperNode)->item(0)->nodeValue;
-      $title = $xPath->query("$titleX", $paperNode)->item(0)->nodeValue;
-      $type = $xPath->query("$typeX", $paperNode)->item(0)->nodeValue; 
+      $id = $xPath->query($idX, $paperNode)->item(0)->nodeValue;
+      $title = $xPath->query($titleX, $paperNode)->item(0)->nodeValue;
+      $type = $xPath->query($typeX, $paperNode)->item(0)->nodeValue; 
       
       // Array vazia pela possibilidade de haver mais de um autor
       $authors = [];
-      $authorsNodes = $xPath->query("$authorX", $paperNode);
+      $authorsNodes = $xPath->query($authorX, $paperNode);
 
       // Foreach para extrair os autores 
       foreach ($authorsNodes as $authorNode) {
@@ -47,7 +47,7 @@ class Scrapper {
       }
       
       // Instânciando o objeto com as informações extraídas 
-      $paper = new Paper($titleX, $authorX, $typeX, $idX);
+      $paper = new Paper($title, $author, $type, $id);
       $paperList[] = $paper;
     }
 
