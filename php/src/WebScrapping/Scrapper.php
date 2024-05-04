@@ -18,7 +18,7 @@ class Scrapper {
 
     // Variáveis que irão extrair as informações do site usando XPath.
     $paperX = "//a[@class='paper-card p-lg bd-gradient-left']";
-    $titleX = ".//h4[@class='paper-title']";
+    $titleX = ".//h4[@class='my-xs paper-title']";
     $authorX = ".//div[@class='authors']/span";
     $typeX = ".//div[@class='tags mr-sm']";
     $idX = ".//div[@class='volume-info']";
