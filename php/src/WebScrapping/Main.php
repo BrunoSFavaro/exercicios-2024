@@ -42,9 +42,15 @@ class Main {
       // Array vazia pela possibilidade de haver mais de um autor
       $authors = [];
       $authorsNodes = $xPath->query("$authorX", $paperNode);
-    }
 
-    // Retorna as informações extraídas dos artigos 
+      // Foreach para extrair os autores 
+      foreach ($authorsNodes as $authorNode) {
+        $author = $authorNode->nodeValue;
+        $institution = $authorNode->getAttribute('title');
+          
+        $authors[] = new Person($author, $institution);
+        }
+      }
     }
 
   }
