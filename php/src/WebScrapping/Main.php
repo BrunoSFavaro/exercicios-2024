@@ -20,12 +20,12 @@ class Main {
 
     $data = (new Scrapper())->scrap($dom);
 
-    //Declaração do objeto da biblioteca OpenSpout.
+    // Declaração do objeto da biblioteca OpenSpout.
     $writer = new Writer();
 
     $writer->openToFile(__DIR__ . '/../../assets/scrappedPaper.xlsx');
 
-    //Criando o cabeçalho da tabela.
+    // Criando o cabeçalho da tabela.
     $header = [
       Cell::fromValue('ID'),
       Cell::fromValue('Title'),
@@ -85,7 +85,7 @@ class Main {
     $soloRow = new Row($header);
     $writer->addRow($soloRow);
 
-    //Adiciona uma nova linha na tabela para cada artigo.
+    // Adiciona uma nova linha na tabela para cada artigo.
     foreach ($data as $paper) {
       $row = new Row([
         Cell::fromValue($paper->id),
@@ -95,21 +95,21 @@ class Main {
 
       $authorData = [];
 
-      //Adicionando informações no vetor de autores.
+      // Adicionando informações no vetor de autores.
       foreach ($paper->authors as $author) {
-        //Adicionando o nome do autor
+        // Adicionando o nome do autor.
         $authorData[] = $author->name;
-        //Adicionando o nome da instituição
+        // Adicionando o nome da instituição.
         $authorData[] = $author->institution;
-       }
+      }
 
-      //Combina as informações do artigo com as do autor.
-       $row = new Row(array_merge($row->getCells(), array_map(fn($value) => Cell::fromValue($value), $authorData)));
+      // Combina as informações do artigo com as do autor.
+      $row = new Row(array_merge($row->getCells(), array_map(fn($value) => Cell::fromValue($value), $authorData)));
 
-      //Adiciona uma linha com todas as informações.
-       $writer->addRow($row);
+      // Adiciona uma linha com todas as informações.
+      $writer->addRow($row);
     }
-    
+
     $writer->close();
   }
 
