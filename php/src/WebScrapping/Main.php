@@ -80,7 +80,16 @@ class Main {
       Cell::fromValue('Author 25 Institution'),
     ];
 
+    $soloRow = new Row($header);
+    $writer->addRow($soloRow);
 
+    // Adiciona uma nova linha na tabela para cada artigo 
+    foreach ($papers as $paper) {
+      $row = new Row([
+        Cell::fromValue($paper->id),
+        Cell::fromValue($paper->title),
+        Cell::fromValue($paper->type),
+      ]);
 
     // Write your logic to save the output file bellow.
     }
