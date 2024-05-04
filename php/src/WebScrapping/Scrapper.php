@@ -45,7 +45,7 @@ class Scrapper {
         $authors[] = new Person($author, $institution);
       }
       // Instânciando o objeto com as informações extraídas.
-      $paper = new Paper($title, $author, $type, $id);
+      $paper = new Paper($id, $titleX, $type, $authors);
       $paperList[] = $paper;
     }
 
