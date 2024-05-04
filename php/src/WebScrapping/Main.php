@@ -91,7 +91,24 @@ class Main {
         Cell::fromValue($paper->type),
       ]);
 
-    // Write your logic to save the output file bellow.
+      $authorData = [];
+
+      // Adicionando informações no vetor de autores 
+      foreach ($paper->authors as $author) {
+        // Adicionando o nome do autor 
+        $authorData[] = $author->name;
+        // Adicionando o nome da instituição 
+        $authorData[] = $author->institution;
+       }
+
+      //  Combina as informações do artigo com as do autor 
+       $row = new Row(array_merge($row->getCells(), array_map(fn($value) => Cell::fromValue($value), $authorData)));
+
+      //  Adiciona uma linha com todas as informações 
+       $writer->addRow($row);
     }
 
+    $writer->close();
+
   }
+}
